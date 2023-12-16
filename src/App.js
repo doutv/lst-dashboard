@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { ApolloClient, InMemoryCache, gql, useQuery } from '@apollo/client';
 import TokenLineChart from './TokenLineGraph';
 import TokenStatistic from './TokenStatistic';
+import "./App.css";
 
 const TOKEN_QUERY = gql`
 query{
@@ -58,7 +59,7 @@ function TokenDashboard() {
     const transformedData = transformNodes(data.dailySummaries.nodes);
     return (
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
-        <h1 style={{ fontSize: '2em', marginBottom: '20px' }}>LDOT Dashboard</h1>
+        <h1>Acala LDOT Dashboard</h1>
         <TokenStatistic transformedData={transformedData} />
         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
           <TokenLineChart title="Exchange Rate" yDataKey="exchangeRate" transformedData={transformedData} color="#8884d8" />

@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+
+h1 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  color: rgb(255, 176, 176);
+  text-shadow: rgb(255, 87, 34) 2px 2px;
+}
+
+h2 {
+  font-size: 1.5em;
+  margin-bottom: 14px;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  color: rgb(255, 176, 176);
+  text-shadow: rgb(255, 87, 34) 1px 1px;
+}
