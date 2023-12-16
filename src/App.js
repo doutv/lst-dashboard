@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { ApolloClient, InMemoryCache, gql, useQuery } from '@apollo/client';
-import TokenLineGraph from './TokenLineGraph';
+import TokenLineChart from './TokenLineGraph';
+import TokenStatistic from './TokenStatistic';
 
 const TOKEN_QUERY = gql`
 query{
@@ -44,24 +45,26 @@ function TokenDashboard() {
     }
   }, [data]);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) { console.error(error); return <p>Error :{error.message}</p>; }
+  if (loading) return (
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+      <div className="spinner-border" role="status">
+        <span className="sr-only">Loading...</span>
+      </div>
+    </div>
+  );
+  if (error) { console.error(error); alert(error.message); }
 
   if (!loading && !error && data) {
+    const transformedData = transformNodes(data.dailySummaries.nodes);
     return (
-      <div>
-        <h1>LDOT Dashboard</h1>
-        <TokenLineGraph data={data.dailySummaries.nodes} />
-        {/* Render your data here */}
-        {transformNodes(data.dailySummaries.nodes).map((node, index) => (
-          <div key={index}>
-            <p>Timestamp: {node.timestamp}</p>
-            <p>Exchange Rate: {node.exchangeRate}</p>
-            <p>Total LDOT: {node.totalLDOT}</p>
-            <p>Total DOT: {node.totalDOT}</p>
-          </div>
-        ))
-        }
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
+        <h1 style={{ fontSize: '2em', marginBottom: '20px' }}>LDOT Dashboard</h1>
+        <TokenStatistic transformedData={transformedData} />
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          <TokenLineChart title="Exchange Rate" yDataKey="exchangeRate" transformedData={transformedData} color="#8884d8" />
+          <TokenLineChart title="Total Locked DOT" yDataKey="totalDOT" transformedData={transformedData} color="#82ca9d" />
+          <TokenLineChart title="Total Locked LDOT" yDataKey="totalLDOT" transformedData={transformedData} color="#ffc658" />
+        </div>
       </div>
     );
   }

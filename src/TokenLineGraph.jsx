@@ -1,11 +1,10 @@
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
-import { transformNodes } from './App';
 
 
 const TokenLineChart = ({ title, yDataKey, transformedData, color }) => {
   return <>
-    <h2>{title}</h2>
+    {title? <h2>{title}</h2>: <></>}
     <LineChart
       width={600}
       height={300}
@@ -22,17 +21,4 @@ const TokenLineChart = ({ title, yDataKey, transformedData, color }) => {
   </>
 }
 
-const TokenLineGraph = ({ data }) => {
-  // Transform the data into a suitable format
-  const transformedData = transformNodes(data);
-
-  return (
-    <>
-      <TokenLineChart title="Exchange Rate" yDataKey="exchangeRate" transformedData={transformedData} color="#8884d8" />
-      <TokenLineChart title="Total DOT" yDataKey="totalDOT" transformedData={transformedData} color="#82ca9d" />
-      <TokenLineChart title="Total LDOT" yDataKey="totalLDOT" transformedData={transformedData} color="#ffc658" />
-    </>
-  );
-};
-
-export default TokenLineGraph;
+export default TokenLineChart;
