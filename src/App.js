@@ -28,7 +28,7 @@ const client = new ApolloClient({
 
 export const transformNodes = (nodes) => {
   return nodes.map(node => ({
-    timestamp: node.timestamp,
+    timestamp: node.timestamp.split("T")[0], // 2023-10-04T00:00:00 -> 2023-10-04
     exchangeRate: (parseInt(node.exchangeRate) / (10 ** TOKEN_DECIMALS)).toFixed(3),
     totalLDOT: ((parseInt(node.totalVoidLiquid) + parseInt(node.liquidIssuance)) / (10 ** TOKEN_DECIMALS)).toFixed(0),
     totalDOT: ((parseInt(node.bonded) + parseInt(node.toBondPool)) / (10 ** TOKEN_DECIMALS)).toFixed(0)
@@ -50,7 +50,7 @@ function TokenDashboard() {
   if (!loading && !error && data) {
     return (
       <div>
-        <h1>Token Dashboard</h1>
+        <h1>LDOT Dashboard</h1>
         <TokenLineGraph data={data.dailySummaries.nodes} />
         {/* Render your data here */}
         {transformNodes(data.dailySummaries.nodes).map((node, index) => (
