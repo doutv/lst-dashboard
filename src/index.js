@@ -2,12 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import TokenDashboard from './App';
+import AcalaTokenDashboard from './Acala';
+import BifrostTokenDashboard from './Bifrost';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <TokenDashboard />
+    <AcalaTokenDashboard />
+    <BifrostTokenDashboard />
   </React.StrictMode>
 );
 

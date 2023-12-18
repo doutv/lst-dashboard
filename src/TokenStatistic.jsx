@@ -27,7 +27,7 @@ const CompareStatistic = ({ title, previous, latest, precision }) => {
   )
 }
 
-const TokenStatistic = ({ transformedData }) => {
+const TokenStatistic = ({ LSTName, transformedData }) => {
   const [DOTPrice, setDOTPrice] = useState();
   useEffect(() => {
     async function getDOTPrice() {
@@ -44,7 +44,7 @@ const TokenStatistic = ({ transformedData }) => {
     <div style={{ display: "flex", flexDirection: "row", gap: "16px" }}>
       <Card bordered={false}>
         <CompareStatistic
-          title="LDOT/DOT"
+          title={`${LSTName}/DOT`}
           previous={preData["exchangeRate"]}
           latest={latestData["exchangeRate"]}
           precision={3}
@@ -60,7 +60,7 @@ const TokenStatistic = ({ transformedData }) => {
       </Card>
       <Card bordered={false}>
         <Statistic
-          title="LDOT Price"
+          title={`${LSTName} Price`}
           value={DOTPrice * latestData["exchangeRate"]}
           prefix="$"
           precision={2}
@@ -76,9 +76,9 @@ const TokenStatistic = ({ transformedData }) => {
       </Card>
       <Card bordered={false}>
         <CompareStatistic
-          title="Total Locked LDOT"
-          previous={preData["totalLDOT"]}
-          latest={latestData["totalLDOT"]}
+          title={`Total Locked ${LSTName}`}
+          previous={preData["totalLST"]}
+          latest={latestData["totalLST"]}
           precision={0}
         />
       </Card>

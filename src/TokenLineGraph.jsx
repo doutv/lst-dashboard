@@ -3,8 +3,9 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'r
 
 
 const TokenLineChart = ({ title, yDataKey, transformedData, color }) => {
+  const maxY = Math.max(...transformedData.map(item => item[yDataKey]));
   return <>
-    {title? <h2>{title}</h2>: <></>}
+    {title ? <h2>{title}</h2> : <></>}
     <LineChart
       width={600}
       height={300}
@@ -13,7 +14,7 @@ const TokenLineChart = ({ title, yDataKey, transformedData, color }) => {
     >
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="timestamp" />
-      <YAxis />
+      <YAxis type="number" domain={[0, maxY]} />
       <Tooltip />
       <Legend />
       <Line type="monotone" dataKey={yDataKey} stroke={color} dot={{ r: 1 }} />
