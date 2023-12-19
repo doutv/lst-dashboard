@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
 import { ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons';
-import { Card, Col, Row, Statistic } from 'antd';
+import { Card, Statistic } from 'antd';
+import React, { useEffect, useState } from 'react';
 
 const CompareStatistic = ({ title, previous, latest, precision }) => {
   let col;
@@ -41,8 +41,8 @@ const TokenStatistic = ({ LSTName, transformedData }) => {
   const preData = transformedData[transformedData.length - 2];
   const latestData = transformedData[transformedData.length - 1];
   return (
-    <div style={{ display: "flex", flexDirection: "row", gap: "16px" }}>
-      <Card bordered={false}>
+    <div style={{ display: "flex", flexDirection: "row", gap: "16px", flexWrap: "wrap" }}>
+      <Card bordered={false} style={{ flex: "0 0 auto", maxWidth: "100%" }}>
         <CompareStatistic
           title={`${LSTName}/DOT`}
           previous={preData["exchangeRate"]}
@@ -50,7 +50,7 @@ const TokenStatistic = ({ LSTName, transformedData }) => {
           precision={3}
         />
       </Card>
-      <Card bordered={false}>
+      <Card bordered={false} style={{ flex: "0 0 auto", maxWidth: "100%" }}>
         <Statistic
           title="DOT Price"
           value={DOTPrice}
@@ -58,7 +58,7 @@ const TokenStatistic = ({ LSTName, transformedData }) => {
           precision={2}
         />
       </Card>
-      <Card bordered={false}>
+      <Card bordered={false} style={{ flex: "0 0 auto", maxWidth: "100%" }}>
         <Statistic
           title={`${LSTName} Price`}
           value={DOTPrice * latestData["exchangeRate"]}
@@ -66,7 +66,7 @@ const TokenStatistic = ({ LSTName, transformedData }) => {
           precision={2}
         />
       </Card>
-      <Card bordered={false}>
+      <Card bordered={false} style={{ flex: "0 0 auto", maxWidth: "100%" }}>
         <CompareStatistic
           title="Total Locked DOT"
           previous={preData["totalDOT"]}
@@ -74,7 +74,7 @@ const TokenStatistic = ({ LSTName, transformedData }) => {
           precision={0}
         />
       </Card>
-      <Card bordered={false}>
+      <Card bordered={false} style={{ flex: "0 0 auto", maxWidth: "100%" }}>
         <CompareStatistic
           title={`Total Locked ${LSTName}`}
           previous={preData["totalLST"]}
